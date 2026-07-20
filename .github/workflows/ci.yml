@@ -1,0 +1,38 @@
+name: CI Pipeline - Práctica 6
+
+# 1. Configuración de Triggers (Desencadenadores)
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# 2. Configuración de Trabajos (Jobs)
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    # 3. Pasos a ejecutarse dentro del trabajo (Steps)
+    steps:
+      # Paso 1: Descargar el código del repositorio
+      - name: Checkout del código fuente
+        uses: actions/checkout@v4
+
+      # Paso 2: Configurar el entorno de Node.js
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Paso 3: Instalar las dependencias
+      - name: Instalar dependencias
+        run: npm ci
+
+      # Paso 4: Ejecutar el análisis estático con ESLint
+      - name: Ejecutar ESLint
+        run: npm run lint
+
+      # Paso 5: Ejecutar las pruebas unitarias con Jest
+      - name: Ejecutar Pruebas Unitarias
+        run: npm test
