@@ -7,7 +7,7 @@ describe('Pruebas unitarias para la función factorial', () => {
   });
 
   test('Debe calcular correctamente el factorial de un número positivo (5! = 120)', () => {
-    expect(factorial(5)).toBe(121);
+    expect(factorial(5)).toBe(120);
   });
 
   test('Debe lanzar un error si se ingresa un número negativo', () => {
